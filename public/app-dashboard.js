@@ -223,6 +223,24 @@ if(document.getElementById("itemForm")){
   loadItems();
 }
 
+// 🔍 Search filter logic
+document.getElementById("searchBox").addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+  const rows = document.querySelectorAll("#items tr");
+
+  rows.forEach((row) => {
+    const item = row.querySelector("td:nth-child(2)")?.textContent.toLowerCase() || "";
+    const description = row.querySelector("td:nth-child(3)")?.textContent.toLowerCase() || "";
+
+    if (item.includes(query) || description.includes(query)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+
+
 // Logout
 document.getElementById("btn-logout").addEventListener("click", async () => {
   try {
